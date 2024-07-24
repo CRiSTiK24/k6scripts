@@ -1,5 +1,7 @@
 import http from 'k6/http';
 import { check, group, sleep } from 'k6';
+const ipfile = JSON.parse(open('./ipfile.json'));
+const ipAddress = ipfile.ip;
 export const options = {
   stages: [
     { duration: '1m', target: 100 }, // simulate ramp-up of traffic from 1 to 100 users over 1 minute.
@@ -11,11 +13,11 @@ export const options = {
   },
 };
 export default () => {
-  const res = http.get('http://34.77.116.231:8085', {
-  });           //call the api and set the response to res
+  const res = http.get(`http://${ipAddress}:8085`, {}); //backticks for parsing the json variable
+
 check(res, {
-    'is status 200': (r) => r.status===200,//check 1
+    'is status 200': (r) => r.status===200,
 'response body contains start creating a game': (r)=>
- r.body.includes('start creating a game'),//check 2
+ r.body.includes('start creating a game'),
   });
 };
