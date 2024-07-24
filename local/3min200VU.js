@@ -11,7 +11,7 @@ export const options = {
   },
 };
 export default () => {
-  const res = http.get('http://79.117.26.105:8085', {
+  const res = http.get('http://79.116.177.3:8085', {
   });           //call the api and set the response to res
 check(res, {
     'is status 200': (r) => r.status===200,//check 1
